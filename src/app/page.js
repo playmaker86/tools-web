@@ -19,17 +19,8 @@ export default function Home() {
             开发者工具箱
           </h1>
           <p className="text-muted-foreground">
-            实用的开发工具集合，助力你的日常开发工作
+            实用的开发工具集合，助力你的日常工作
           </p>
-          
-          {/* App Router 示例链接 */}
-          <div className="flex gap-2 justify-center">
-            <Link href="/about">
-              <Button variant="outline" size="sm">
-                📄 关于页面（App Router 示例）
-              </Button>
-            </Link>
-          </div>
         </div>
 
         {/* 工具 Tabs */}
