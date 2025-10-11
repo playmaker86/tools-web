@@ -1,13 +1,11 @@
 "use client";
 
-import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
-import { Button } from "@/components/ui/button";
+import {Tabs, TabsContent, TabsList, TabsTrigger} from "@/components/ui/tabs";
 import Calculator from "@/components/tools/Calculator";
 import JsonFormatter from "@/components/tools/JsonFormatter";
 import Base64Tool from "@/components/tools/Base64Tool";
 import TimestampConverter from "@/components/tools/TimestampConverter";
 import UrlTool from "@/components/tools/UrlTool";
-import Link from "next/link";
 
 export default function Home() {
   return (
