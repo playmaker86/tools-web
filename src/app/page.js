@@ -16,10 +16,10 @@ export default function Home() {
         {/* 页面标题 */}
         <div className="text-center space-y-4 py-6">
           <h1 className="text-4xl font-bold bg-gradient-to-r from-primary to-primary/60 bg-clip-text text-transparent">
-            开发者工具箱
+            工具箱
           </h1>
           <p className="text-muted-foreground">
-            实用的开发工具集合，助力你的日常工作
+            实用的工具集合，助力你的日常工作
           </p>
         </div>
 
