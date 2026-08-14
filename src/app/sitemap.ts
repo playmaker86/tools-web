@@ -1,7 +1,8 @@
 import { MetadataRoute } from "next";
 
 export default function sitemap(): MetadataRoute.Sitemap {
-  const baseUrl = process.env.NEXT_PUBLIC_SITE_URL || "https://toolbox.example.com";
+  const baseUrl =
+    process.env.NEXT_PUBLIC_SITE_URL || "https://tools-web-lemon.vercel.app";
 
   return [
     { url: baseUrl, lastModified: new Date(), changeFrequency: "weekly", priority: 1 },
