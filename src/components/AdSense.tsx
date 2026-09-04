@@ -6,6 +6,7 @@ import {
   getConsentSnapshot,
   getConsentServerSnapshot,
 } from "@/lib/consent";
+import { isAdSenseEnabled } from "@/lib/adsense";
 
 interface AdSenseProps {
   adSlot?: string;
@@ -139,6 +140,8 @@ export default function AdSense({
       clearTimeout(timeout);
     };
   }, [consent]);
+
+  if (!isAdSenseEnabled()) return null;
 
   if (!adSlot || !adClient) return null;
 
