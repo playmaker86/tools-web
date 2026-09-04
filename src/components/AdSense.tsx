@@ -135,20 +135,11 @@ export default function AdSense({
   if (adStatus === "unfilled") return null;
 
   return (
-    <div
-      ref={containerRef}
-      className="my-4 flex justify-center"
-      style={adStatus === "filled" ? undefined : { minWidth: "320px", minHeight: "100px" }}
-    >
+    <div ref={containerRef} className="my-4 flex justify-center">
       <ins
         ref={adRef}
         className="adsbygoogle"
-        style={{
-          ...style,
-          display: "block",
-          minWidth: "320px",
-          minHeight: "100px",
-        }}
+        style={{ ...style, display: "block" }}
         data-ad-client={adClient}
         data-ad-slot={adSlot}
         data-ad-format={adFormat}
