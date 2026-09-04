@@ -1,5 +1,7 @@
 import type { Metadata } from "next";
 import Calculator from "@/components/tools/Calculator";
+import JsonLd from "@/components/JsonLd";
+import { toolJsonLd } from "@/lib/site";
 import {
   Card,
   CardContent,
@@ -12,13 +14,44 @@ export const metadata: Metadata = {
   title: "Calculator - Toolbox",
   description:
     "Free online calculator with basic arithmetic functions. Simple, fast, and runs directly in your browser. No downloads, no registration.",
+  alternates: { canonical: "/tools/calculator" },
 };
+
+const jsonLd = toolJsonLd({
+  name: "Calculator",
+  path: "/tools/calculator",
+  description:
+    "Free online calculator with basic arithmetic functions — addition, subtraction, multiplication, and division. Simple, fast, and runs directly in your browser.",
+  faqs: [
+    {
+      q: "Can I use my keyboard?",
+      a: "Yes. The calculator accepts input from your keyboard: digits, operators (+, -, *, /), Enter for equals, and Escape or Backspace to clear.",
+    },
+    {
+      q: "What happens if I divide by zero?",
+      a: "Dividing by zero is mathematically undefined. The calculator will not return a result and keeps your input so you can correct it instead of showing a confusing error value.",
+    },
+    {
+      q: "Does it handle decimal numbers?",
+      a: "Yes. Press the . button to enter decimals such as 3.14 or 0.5. Results may show long decimal expansions; use rounding to the precision you need.",
+    },
+    {
+      q: "Is my calculation saved anywhere?",
+      a: "No. Everything stays in your browser tab. Closing or refreshing the page discards your input, and nothing is sent to any server.",
+    },
+    {
+      q: "Can I chain multiple operations?",
+      a: "Yes, you can keep pressing operators after a result to chain further calculations, for example 10 + 5 = 15 × 2 = 30.",
+    },
+  ],
+});
 
 export default function CalculatorPage() {
   const bottomSlot = process.env.NEXT_PUBLIC_ADSENSE_SLOT_BOTTOM;
 
   return (
     <div className="min-h-screen p-4 md:p-8">
+      <JsonLd data={jsonLd} />
       <AdLayout bottomSlot={bottomSlot}>
         <div className="space-y-6">
           <div>

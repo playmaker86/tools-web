@@ -2,6 +2,18 @@ import Link from "next/link";
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card";
 import { Calculator, Braces, Link2, Clock, Binary } from "lucide-react";
 import AdSense from "@/components/AdSense";
+import JsonLd from "@/components/JsonLd";
+import { SITE_URL } from "@/lib/site";
+
+const websiteJsonLd = {
+  "@context": "https://schema.org",
+  "@type": "WebSite",
+  name: "Toolbox",
+  url: SITE_URL,
+  description:
+    "A collection of free online tools for developers and daily use. All tools run entirely in the browser.",
+  publisher: { "@type": "Organization", name: "Toolbox", url: SITE_URL },
+};
 
 const tools = [
   {
@@ -39,6 +51,7 @@ const tools = [
 export default function Home() {
   return (
     <div className="min-h-screen bg-linear-to-br from-background to-muted">
+      <JsonLd data={websiteJsonLd} />
       <div className="max-w-5xl mx-auto p-4 md:p-8 space-y-12">
         <div className="text-center space-y-4 py-8 md:py-12">
           <h1 className="text-4xl md:text-5xl font-bold bg-linear-to-r from-primary to-primary/60 bg-clip-text text-transparent">

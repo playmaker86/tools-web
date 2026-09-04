@@ -4,6 +4,7 @@ import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 export const metadata: Metadata = {
   title: "Privacy Policy - Toolbox",
   description: "Privacy policy for Toolbox - how we handle your data and use cookies.",
+  alternates: { canonical: "/privacy" },
 };
 
 export default function PrivacyPage() {

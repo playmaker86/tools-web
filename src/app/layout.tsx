@@ -1,6 +1,8 @@
 import type { Metadata } from "next";
 import { Geist, Geist_Mono } from "next/font/google";
 import Footer from "@/components/Footer";
+import ConsentBanner from "@/components/ConsentBanner";
+import { SITE_URL } from "@/lib/site";
 import "./globals.css";
 
 const geistSans = Geist({
@@ -14,6 +16,7 @@ const geistMono = Geist_Mono({
 });
 
 export const metadata: Metadata = {
+  metadataBase: new URL(SITE_URL),
   title: {
     default: "Toolbox - Free Online Tools for Developers",
     template: "%s - Toolbox",
@@ -32,11 +35,21 @@ export const metadata: Metadata = {
   ],
   authors: [{ name: "Toolbox" }],
   robots: "index, follow",
+  alternates: { canonical: "/" },
   openGraph: {
     title: "Toolbox - Free Online Tools for Developers",
     description:
       "Free online tools for developers. JSON formatter, Base64 encoder, timestamp converter, and more.",
+    url: "/",
+    siteName: "Toolbox",
+    locale: "en_US",
     type: "website",
+  },
+  twitter: {
+    card: "summary",
+    title: "Toolbox - Free Online Tools for Developers",
+    description:
+      "Free online tools for developers. JSON formatter, Base64 encoder, timestamp converter, and more.",
   },
 };
 
@@ -53,11 +66,20 @@ export default function RootLayout({
         className={`${geistSans.variable} ${geistMono.variable} antialiased`}
       >
         {adsenseClientId && (
-          <script
-            async
-            src={`https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=${adsenseClientId}`}
-            crossOrigin="anonymous"
-          />
+          <>
+            <script
+              dangerouslySetInnerHTML={{
+                __html:
+                  "window.dataLayer=window.dataLayer||[];window.gtag=function(){window.dataLayer.push(arguments)};gtag('consent','default',{ad_storage:'denied',ad_user_data:'denied',ad_personalization:'denied',analytics_storage:'denied'});",
+              }}
+            />
+            <script
+              async
+              src={`https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=${adsenseClientId}`}
+              crossOrigin="anonymous"
+            />
+            <ConsentBanner />
+          </>
         )}
         {children}
         <Footer />

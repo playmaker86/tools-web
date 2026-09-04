@@ -1,5 +1,7 @@
 import type { Metadata } from "next";
 import JsonFormatter from "@/components/tools/JsonFormatter";
+import JsonLd from "@/components/JsonLd";
+import { toolJsonLd } from "@/lib/site";
 import {
   Card,
   CardContent,
@@ -12,13 +14,44 @@ export const metadata: Metadata = {
   title: "JSON Formatter - Toolbox",
   description:
     "Free JSON formatter, validator, and minifier. Format messy JSON into readable, properly indented output instantly, right in your browser.",
+  alternates: { canonical: "/tools/json-formatter" },
 };
+
+const jsonLd = toolJsonLd({
+  name: "JSON Formatter",
+  path: "/tools/json-formatter",
+  description:
+    "Free online JSON formatter, validator, and minifier. Format messy JSON into readable, properly indented output instantly, right in your browser.",
+  faqs: [
+    {
+      q: "Why is my JSON rejected as invalid?",
+      a: "The most common causes are trailing commas after the last item, single quotes instead of double quotes, unquoted keys, and comments. JSON strictly requires double-quoted strings and does not allow trailing commas or // comments.",
+    },
+    {
+      q: "Does it handle large or nested JSON?",
+      a: "Yes. Deeply nested objects and large arrays are supported. Formatting is performed in your browser, so very large documents are processed locally without uploading anything.",
+    },
+    {
+      q: "What is the difference between format and minify?",
+      a: "Format adds indentation and line breaks so the structure is easy to read. Minify removes all unnecessary whitespace and newlines to produce the smallest possible string for storage or transmission.",
+    },
+    {
+      q: "Can it format non-JSON like YAML or SQL?",
+      a: "No. This tool validates and formats JSON only. If your input is not valid JSON, it will be reported as an error rather than silently producing misleading output.",
+    },
+    {
+      q: "Is my data uploaded anywhere?",
+      a: "No. Everything is processed locally in your browser. You can safely paste confidential API responses or configuration files without worrying about them leaving your device.",
+    },
+  ],
+});
 
 export default function JsonFormatterPage() {
   const bottomSlot = process.env.NEXT_PUBLIC_ADSENSE_SLOT_BOTTOM;
 
   return (
     <div className="min-h-screen p-4 md:p-8">
+      <JsonLd data={jsonLd} />
       <AdLayout bottomSlot={bottomSlot}>
         <div className="space-y-6">
           <div>

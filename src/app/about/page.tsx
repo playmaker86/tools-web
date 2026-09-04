@@ -12,6 +12,7 @@ export const metadata: Metadata = {
   title: "About - Toolbox",
   description:
     "Learn about Toolbox, a collection of free online developer tools that run entirely in your browser. No registration, no data collection, no ads on results.",
+  alternates: { canonical: "/about" },
 };
 
 const toolLinks = [

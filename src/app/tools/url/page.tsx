@@ -1,5 +1,7 @@
 import type { Metadata } from "next";
 import UrlTool from "@/components/tools/UrlTool";
+import JsonLd from "@/components/JsonLd";
+import { toolJsonLd } from "@/lib/site";
 import {
   Card,
   CardContent,
@@ -12,13 +14,44 @@ export const metadata: Metadata = {
   title: "URL Encoder / Decoder - Toolbox",
   description:
     "Free online URL encoding and decoding tool. Encode special characters for safe URL usage or decode percent-encoded URLs back to plain text.",
+  alternates: { canonical: "/tools/url" },
 };
+
+const jsonLd = toolJsonLd({
+  name: "URL Encoder / Decoder",
+  path: "/tools/url",
+  description:
+    "Free online URL encoding and decoding tool. Encode special characters for safe URL usage or decode percent-encoded URLs back to plain text.",
+  faqs: [
+    {
+      q: "What is the difference between encodeURIComponent and encodeURI?",
+      a: "encodeURIComponent escapes almost everything, including /, ?, and &, making it the right choice for query parameter values. encodeURI leaves structural characters intact and is meant for full URLs.",
+    },
+    {
+      q: "Why does a space encode to %20 instead of +?",
+      a: "In query strings, + is a legacy way to represent a space (used by form submissions). Standard URL encoding uses %20 for a space everywhere.",
+    },
+    {
+      q: "Do I need to encode non-ASCII characters?",
+      a: "Modern browsers often handle Unicode directly, but many APIs and legacy systems expect percent-encoded UTF-8. Encoding is always the safe choice for maximum compatibility.",
+    },
+    {
+      q: "Can URL encoding be reversed automatically?",
+      a: "Yes. Decoding turns %XX sequences back into their original characters, so you can round-trip encoded URLs back to plain text for debugging.",
+    },
+    {
+      q: "Is my URL sent to a server?",
+      a: "No. Both encoding and decoding happen entirely in your browser, so you can safely process sensitive URLs and tokens without them leaving your device.",
+    },
+  ],
+});
 
 export default function UrlPage() {
   const bottomSlot = process.env.NEXT_PUBLIC_ADSENSE_SLOT_BOTTOM;
 
   return (
     <div className="min-h-screen p-4 md:p-8">
+      <JsonLd data={jsonLd} />
       <AdLayout bottomSlot={bottomSlot}>
         <div className="space-y-6">
           <div>

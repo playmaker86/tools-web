@@ -1,5 +1,7 @@
 import type { Metadata } from "next";
 import TimestampConverter from "@/components/tools/TimestampConverter";
+import JsonLd from "@/components/JsonLd";
+import { toolJsonLd } from "@/lib/site";
 import {
   Card,
   CardContent,
@@ -12,13 +14,44 @@ export const metadata: Metadata = {
   title: "Timestamp Converter - Toolbox",
   description:
     "Free Unix timestamp to date converter. Convert between Unix timestamps (seconds/milliseconds) and human-readable dates instantly.",
+  alternates: { canonical: "/tools/timestamp" },
 };
+
+const jsonLd = toolJsonLd({
+  name: "Timestamp Converter",
+  path: "/tools/timestamp",
+  description:
+    "Free Unix timestamp to date converter. Convert between Unix timestamps (seconds or milliseconds) and human-readable dates instantly.",
+  faqs: [
+    {
+      q: "How do I know if my timestamp is in seconds or milliseconds?",
+      a: "As a rule of thumb, timestamps before roughly 2001 have 10 digits (seconds) or 13 digits (milliseconds). Values around 1 billion are seconds; values around 1 trillion are milliseconds. This tool detects both automatically.",
+    },
+    {
+      q: "Why is the displayed time different from my local time?",
+      a: "Unix timestamps are timezone-independent. The converter shows the date in UTC by default. Local conversion is a display choice — the underlying instant is the same everywhere on Earth.",
+    },
+    {
+      q: "What happens to dates before 1970?",
+      a: "Negative timestamps represent dates before the epoch. This tool handles them correctly, so values like -86400 resolve to 1969-12-31.",
+    },
+    {
+      q: "What is the maximum representable timestamp?",
+      a: "In many systems, 64-bit timestamps cover dates up to the year 292 billion. JavaScript's number type safely represents milliseconds up to about the year 275,760, which is far beyond any practical use.",
+    },
+    {
+      q: "Why do some APIs return milliseconds and others seconds?",
+      a: "It depends on the language. JavaScript, C# (ticks aside), and Java use milliseconds, while PHP, Ruby, and most SQL databases use seconds. Always check your API's documentation.",
+    },
+  ],
+});
 
 export default function TimestampPage() {
   const bottomSlot = process.env.NEXT_PUBLIC_ADSENSE_SLOT_BOTTOM;
 
   return (
     <div className="min-h-screen p-4 md:p-8">
+      <JsonLd data={jsonLd} />
       <AdLayout bottomSlot={bottomSlot}>
         <div className="space-y-6">
           <div>

@@ -1,5 +1,7 @@
 import type { Metadata } from "next";
 import Base64Tool from "@/components/tools/Base64Tool";
+import JsonLd from "@/components/JsonLd";
+import { toolJsonLd } from "@/lib/site";
 import {
   Card,
   CardContent,
@@ -12,13 +14,44 @@ export const metadata: Metadata = {
   title: "Base64 Encoder / Decoder - Toolbox",
   description:
     "Free online Base64 encoding and decoding tool with full UTF-8 support. Encode text to Base64 or decode Base64 back to readable text.",
+  alternates: { canonical: "/tools/base64" },
 };
+
+const jsonLd = toolJsonLd({
+  name: "Base64 Encoder / Decoder",
+  path: "/tools/base64",
+  description:
+    "Free online Base64 encoding and decoding tool with full UTF-8 support. Encode text to Base64 or decode Base64 back to readable text.",
+  faqs: [
+    {
+      q: "Why does my Chinese text get garbled on other sites?",
+      a: "Many legacy tools encode each character as a single byte using the Latin-1 charset, which corrupts Chinese, Japanese, Korean, and emoji. This tool uses proper UTF-8 encoding, so Unicode text round-trips correctly.",
+    },
+    {
+      q: "Is Base64 encryption?",
+      a: "No. Base64 is encoding, not encryption. Anyone can decode a Base64 string, so never use it to protect sensitive data. It exists to make binary data safe to transmit over text-only channels.",
+    },
+    {
+      q: "What about URL-safe Base64?",
+      a: "Standard Base64 uses + and /, which have special meaning in URLs. URL-safe Base64 replaces them with - and _. This tool outputs standard Base64; replace those two characters if you need the URL-safe variant.",
+    },
+    {
+      q: "Why does my decoded output contain strange symbols?",
+      a: "It usually means the input was not valid Base64 to begin with, or it encoded binary data (like an image) rather than text. This tool interprets the decoded bytes as UTF-8 text.",
+    },
+    {
+      q: "Can I encode files or images?",
+      a: "Not directly — this tool works on text. For images, tools usually read the file as bytes first. The same Base64 principles apply once the bytes are converted to a string.",
+    },
+  ],
+});
 
 export default function Base64Page() {
   const bottomSlot = process.env.NEXT_PUBLIC_ADSENSE_SLOT_BOTTOM;
 
   return (
     <div className="min-h-screen p-4 md:p-8">
+      <JsonLd data={jsonLd} />
       <AdLayout bottomSlot={bottomSlot}>
         <div className="space-y-6">
           <div>

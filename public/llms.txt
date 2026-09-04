@@ -1,0 +1,18 @@
+# Toolbox
+
+> Toolbox is a collection of free online tools for developers and daily use, including a calculator, JSON formatter, Base64 encoder/decoder, Unix timestamp converter, and URL encoder/decoder. All tools run entirely in the browser — no registration, no data collection, completely free.
+
+## Tools
+
+- [Calculator](https://jade-tools-web.vercel.app/tools/calculator): Free online calculator for quick arithmetic — addition, subtraction, multiplication, and division, with decimals and keyboard support.
+- [JSON Formatter](https://jade-tools-web.vercel.app/tools/json-formatter): Format, validate, and minify JSON data in the browser, with detailed syntax error messages.
+- [Base64 Encoder / Decoder](https://jade-tools-web.vercel.app/tools/base64): Encode text to Base64 or decode Base64 back to text with full UTF-8 support, including Chinese, Japanese, and emoji.
+- [Timestamp Converter](https://jade-tools-web.vercel.app/tools/timestamp): Convert Unix timestamps (seconds or milliseconds) to human-readable dates and vice versa.
+- [URL Encoder / Decoder](https://jade-tools-web.vercel.app/tools/url): Percent-encode special characters for URLs or decode percent-encoded strings back to plain text.
+
+## Company
+
+- [About](https://jade-tools-web.vercel.app/about): What Toolbox is, why it exists, and its privacy-first commitments.
+- [Contact](https://jade-tools-web.vercel.app/contact): Email and social links for feedback, bug reports, and feature requests.
+- [Privacy Policy](https://jade-tools-web.vercel.app/privacy): How data is handled, cookie and advertising disclosures, GDPR/CCPA rights.
+- [Terms of Service](https://jade-tools-web.vercel.app/terms): The rules for using the site and its tools.

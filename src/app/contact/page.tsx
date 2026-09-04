@@ -4,6 +4,7 @@ import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 export const metadata: Metadata = {
   title: "Contact Us - Toolbox",
   description: "Get in touch with the Toolbox team for questions, feedback, or support.",
+  alternates: { canonical: "/contact" },
 };
 
 export default function ContactPage() {
