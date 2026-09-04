@@ -1,8 +1,12 @@
 "use client";
 
 import { useEffect, useSyncExternalStore } from "react";
-
-const CONSENT_KEY = "toolbox-ad-consent";
+import {
+  subscribeConsent,
+  getConsentSnapshot,
+  getConsentServerSnapshot,
+  writeConsent,
+} from "@/lib/consent";
 
 declare global {
   interface Window {
@@ -11,41 +15,25 @@ declare global {
   }
 }
 
-const listeners = new Set<() => void>();
-
-function subscribe(callback: () => void) {
-  listeners.add(callback);
-  return () => listeners.delete(callback);
-}
-
-function getConsentSnapshot(): string {
-  return localStorage.getItem(CONSENT_KEY) ?? "unset";
-}
-
-function getServerSnapshot(): string {
-  return "loading";
-}
-
-function writeConsent(value: "granted" | "denied") {
-  localStorage.setItem(CONSENT_KEY, value);
-  listeners.forEach((notify) => notify());
-}
-
-function updateConsent(value: "granted" | "denied") {
+function grantConsent() {
   window.gtag?.("consent", "update", {
-    ad_storage: value,
-    ad_user_data: value,
-    ad_personalization: value,
-    analytics_storage: value,
+    ad_storage: "granted",
+    ad_user_data: "granted",
+    ad_personalization: "granted",
+    analytics_storage: "granted",
   });
 }
 
 export default function ConsentBanner() {
-  const consent = useSyncExternalStore(subscribe, getConsentSnapshot, getServerSnapshot);
+  const consent = useSyncExternalStore(
+    subscribeConsent,
+    getConsentSnapshot,
+    getConsentServerSnapshot
+  );
 
   useEffect(() => {
     if (getConsentSnapshot() === "granted") {
-      updateConsent("granted");
+      grantConsent();
     }
   }, []);
 

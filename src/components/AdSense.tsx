@@ -1,6 +1,11 @@
 "use client";
 
-import { useEffect, useRef, useState } from "react";
+import { useEffect, useRef, useState, useSyncExternalStore } from "react";
+import {
+  subscribeConsent,
+  getConsentSnapshot,
+  getConsentServerSnapshot,
+} from "@/lib/consent";
 
 interface AdSenseProps {
   adSlot?: string;
@@ -27,9 +32,14 @@ export default function AdSense({
   const pushedRef = useRef(false);
   const [isVisible, setIsVisible] = useState(false);
   const [adStatus, setAdStatus] = useState<string | null>(null);
+  const consent = useSyncExternalStore(
+    subscribeConsent,
+    getConsentSnapshot,
+    getConsentServerSnapshot
+  );
 
   useEffect(() => {
-    if (!adSlot || !adClient) {
+    if (!adSlot || !adClient || consent !== "granted") {
       return;
     }
 
@@ -52,7 +62,7 @@ export default function AdSense({
     return () => {
       observer.unobserve(container);
     };
-  }, [adSlot, adClient]);
+  }, [adSlot, adClient, consent]);
 
   useEffect(() => {
     if (!adSlot || !adClient || !isVisible || pushedRef.current) {
@@ -94,7 +104,7 @@ export default function AdSense({
     return () => {
       timers.forEach((timer) => clearTimeout(timer));
     };
-  }, [adSlot, adClient, isVisible]);
+  }, [adSlot, adClient, isVisible, consent]);
 
   useEffect(() => {
     if (!adRef.current) return;
@@ -128,9 +138,11 @@ export default function AdSense({
       observer.disconnect();
       clearTimeout(timeout);
     };
-  }, []);
+  }, [consent]);
 
   if (!adSlot || !adClient) return null;
+
+  if (consent !== "granted") return null;
 
   if (adStatus === "unfilled") return null;
 
