@@ -36,6 +36,9 @@ export const metadata: Metadata = {
   ],
   authors: [{ name: "Toolbox" }],
   robots: "index, follow",
+  verification: {
+    google: "GPsaoRhaBcb_3BoazxKr5pY7UoYOYR10bI3U7oOvdYc",
+  },
   alternates: { canonical: "/" },
   openGraph: {
     title: "Toolbox - Free Online Tools for Developers",
