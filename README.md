@@ -11,7 +11,7 @@ cp .env.local.example .env.local
 ```
 
 Then edit `.env.local` with your AdSense settings:
-- `NEXT_PUBLIC_ADSENSE_ENABLED`: Set to `true` to enable ads. Keep it `false` (or unset) until your AdSense account is approved — when disabled, no ad script is loaded and no ad slots are rendered.
+- `NEXT_PUBLIC_ADSENSE_ENABLED`: Set to `true` to render ad slots. The AdSense script always loads (as long as `NEXT_PUBLIC_ADSENSE_CLIENT_ID` is set) so site ownership verification works; this flag only controls whether ad slots are rendered on the page.
 - `NEXT_PUBLIC_ADSENSE_CLIENT_ID`: Your AdSense publisher ID (format: `ca-pub-XXXXXXXXXXXXXXXX`)
 - `NEXT_PUBLIC_ADSENSE_SLOT_TOP`: Ad slot ID for the top banner ad
 - `NEXT_PUBLIC_ADSENSE_SLOT_BOTTOM_LEFT`: Ad slot ID for the bottom left ad

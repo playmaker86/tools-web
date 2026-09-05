@@ -3,7 +3,7 @@ import { Geist, Geist_Mono } from "next/font/google";
 import Footer from "@/components/Footer";
 import ConsentBanner from "@/components/ConsentBanner";
 import { SITE_URL } from "@/lib/site";
-import { isAdSenseEnabled } from "@/lib/adsense";
+import { isAdSenseEnabled, isAdSenseScriptEnabled } from "@/lib/adsense";
 import "./globals.css";
 
 const geistSans = Geist({
@@ -66,7 +66,7 @@ export default function RootLayout({
       <body
         className={`${geistSans.variable} ${geistMono.variable} antialiased`}
       >
-        {isAdSenseEnabled() && adsenseClientId && (
+        {isAdSenseScriptEnabled() && adsenseClientId && (
           <>
             <script
               dangerouslySetInnerHTML={{
@@ -79,7 +79,7 @@ export default function RootLayout({
               src={`https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=${adsenseClientId}`}
               crossOrigin="anonymous"
             />
-            <ConsentBanner />
+            {isAdSenseEnabled() && <ConsentBanner />}
           </>
         )}
         {children}
